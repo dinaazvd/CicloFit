@@ -1,0 +1,322 @@
+/* Customização do Título Principal */
+.main-title {
+  color: #ff4d6d !important;
+}
+
+/* Paleta de Cores e Estilos Gerais */
+:root {
+  --primary-color: #ff4d6d;
+  --primary-hover: #e03a58;
+  --flo-coral: #ff5a79;
+  --flo-coral-light: #ffe5ea;
+  --flo-teal: #17bebb;
+  --flo-teal-light: #e0f7f6;
+  --flo-follicular: #f3e8ff;
+  --flo-luteal: #fef3c7;
+  --bg-subtle: #fdf8fa;
+  --card-border: #f0e2e7;
+}
+
+body {
+  background-color: #faf7f8;
+  color: #2b2b2b;
+}
+
+/* =========================================
+   ESTILO DO CALENDÁRIO INSPIRADO NO APP FLO
+   ========================================= */
+.flo-calendar-card {
+  border-radius: 20px !important;
+  background: #ffffff;
+}
+
+.flo-input {
+  border-radius: 10px;
+  border-color: #ead8df;
+}
+
+.flo-input:focus {
+  border-color: var(--flo-coral);
+  box-shadow: 0 0 0 0.2rem rgba(255, 90, 121, 0.2);
+}
+
+.flo-period-btn {
+  background-color: var(--flo-coral-light);
+  color: #d62849;
+  border: 1px solid #ffc2ce;
+  border-radius: 20px;
+  padding: 6px 14px;
+  transition: all 0.2s ease;
+}
+
+.flo-period-btn:hover {
+  background-color: var(--flo-coral);
+  color: #ffffff;
+}
+
+.flo-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f8f2f4;
+  color: #4a4a4a;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: background 0.2s ease;
+}
+
+.flo-nav-btn:hover {
+  background-color: var(--flo-coral-light);
+  color: var(--flo-coral);
+}
+
+.flo-subtitle {
+  color: var(--flo-coral);
+}
+
+/* Grade de Dias da Semana */
+.flo-weekdays-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Grade Mensal de Dias */
+.flo-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px 4px;
+  justify-items: center;
+}
+
+.flo-day-cell {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+}
+
+.flo-day-cell.empty {
+  cursor: default;
+  pointer-events: none;
+}
+
+.flo-day-cell:not(.empty):hover {
+  transform: scale(1.08);
+}
+
+.flo-day-number {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.flo-cycle-tag {
+  font-size: 0.58rem;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* Cores das Fases no Calendário Estilo Flo */
+.flo-phase-menstrual {
+  background-color: var(--flo-coral);
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(255, 90, 121, 0.35);
+}
+
+.flo-phase-follicular {
+  background-color: #f8f5fc;
+  color: #5b3e82;
+}
+
+.flo-phase-fertile {
+  background-color: var(--flo-teal-light);
+  color: #0d7a78;
+}
+
+.flo-phase-ovulatory {
+  background-color: var(--flo-teal-light);
+  color: #096361;
+  border: 2px dashed var(--flo-teal);
+  font-weight: 800;
+}
+
+.flo-phase-luteal {
+  background-color: #fdf9ed;
+  color: #785b18;
+}
+
+/* Destaque do Dia Atual (Hoje) */
+.flo-day-cell.is-today::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+/* Destaque do Dia Selecionado pela Usuária */
+.flo-day-cell.selected {
+  outline: 3px solid #2b2b2b;
+  outline-offset: 2px;
+  transform: scale(1.06);
+  z-index: 2;
+}
+
+/* Bolinhas da Legenda Estilo Flo */
+.flo-legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-menstrual {
+  background-color: var(--flo-coral);
+}
+
+.legend-follicular {
+  background-color: #e9d8fd;
+}
+
+.legend-fertile {
+  background-color: var(--flo-teal-light);
+  border: 1px solid var(--flo-teal);
+}
+
+.legend-ovulation {
+  background-color: var(--flo-teal-light);
+  border: 2px dashed var(--flo-teal);
+}
+
+.legend-luteal {
+  background-color: #fef08a;
+}
+
+/* =========================================
+   BOTÕES E CARDS DE TREINO
+   ========================================= */
+.workout-header {
+  margin-bottom: 8px;
+}
+
+.sheet-indicator {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.exercise-card {
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.exercise-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--flo-coral);
+  opacity: 0.85;
+}
+
+.exercise-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 90, 121, 0.12);
+  border-color: #ffc2ce;
+}
+
+.exercise-number {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #d62849;
+  background-color: var(--flo-coral-light);
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.exercise-title {
+  color: #2b2b2b;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.exercise-meta-box {
+  background-color: #fbfbfc;
+  border: 1px dashed #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.exercise-meta-item {
+  font-size: 0.8rem;
+  color: #4b5563;
+  margin: 0;
+}
+
+.exercise-meta-item strong {
+  color: #1f2937;
+}
+
+.button-new-training {
+  background-color: #870758 !important;
+  border-color: #bf6aa0 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+#sheetBadge {
+  background-color: #cf4390 !important;
+  color: #ffffff !important;
+}
+
+.btn-training {
+  background-color: var(--flo-coral) !important;
+  border-color: var(--flo-coral) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.btn-training:hover {
+  background-color: var(--primary-hover) !important;
+}
+
+.card-inspiration {
+  background-color: #ffe8ee !important;
+  border: 1px solid #ffd1dc !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+}

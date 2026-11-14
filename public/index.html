@@ -1,0 +1,153 @@
+#### `public/index.html`
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CicloFit - Calendário & Treino</title>
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light text-dark">
+  <div class="container py-4">
+    <header class="text-center mb-4">
+      <h1 class="display-5 fw-bold main-title">CicloFit</h1>
+      <p class="lead text-muted">Sincronize o seu treino e a sua mente com o ciclo menstrual</p>
+    </header>
+
+    <main class="row g-4">
+      <!-- Secção do Calendário no estilo Flo -->
+      <section class="col-12">
+        <div class="card shadow-sm border-0 p-4 flo-calendar-card">
+          <!-- Cabeçalho de Configuração do Ciclo -->
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 pb-3 mb-3 border-bottom">
+            <div>
+              <h2 class="h4 mb-1 fw-bold">Calendário do Ciclo</h2>
+              <p class="text-muted small mb-0">Clique em um dia do mês para consultar a fase ou defina o início da sua menstruação.</p>
+            </div>
+
+            <div class="d-flex flex-wrap align-items-center gap-3">
+              <div>
+                <label for="lastPeriodInput" class="form-label fw-semibold mb-1 text-muted small d-block">1º dia da última menstruação:</label>
+                <input type="date" id="lastPeriodInput" class="form-control form-control-sm flo-input">
+              </div>
+
+              <div>
+                <label for="cycleLengthInput" class="form-label fw-semibold mb-1 text-muted small d-block">Duração do ciclo:</label>
+                <div class="input-group input-group-sm" style="width: 115px;">
+                  <input type="number" id="cycleLengthInput" class="form-control flo-input" value="28" min="15" max="60">
+                  <span class="input-group-text bg-white text-muted">dias</span>
+                </div>
+              </div>
+
+              <div class="align-self-end">
+                <button id="btnLogPeriod" type="button" class="btn btn-sm flo-period-btn fw-semibold">
+                  🩸 Marcar início neste dia
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navegação do Mês (Estilo Flo) -->
+          <div class="flo-month-header d-flex align-items-center justify-content-between mb-3 px-2">
+            <button id="btnPrevMonth" type="button" class="btn btn-sm flo-nav-btn" aria-label="Mês anterior">&#10094;</button>
+            <div class="text-center">
+              <h3 id="currentMonthLabel" class="h5 fw-bold mb-0 text-capitalize">Novembro 2026</h3>
+              <span id="cycleDaySummary" class="small fw-semibold flo-subtitle">Dia 1 do ciclo • Fase Menstrual</span>
+            </div>
+            <button id="btnNextMonth" type="button" class="btn btn-sm flo-nav-btn" aria-label="Próximo mês">&#10095;</button>
+          </div>
+
+          <!-- Dias da Semana -->
+          <div class="flo-weekdays-grid mb-2">
+            <div>D</div>
+            <div>S</div>
+            <div>T</div>
+            <div>Q</div>
+            <div>Q</div>
+            <div>S</div>
+            <div>S</div>
+          </div>
+
+          <!-- Grade de Dias do Mês -->
+          <div id="calendarGrid" class="flo-days-grid"></div>
+
+          <!-- Legenda Estilo Flo -->
+          <div class="calendar-legend d-flex flex-wrap justify-content-center gap-4 mt-4 pt-3 border-top text-secondary small">
+            <span class="legend-item d-flex align-items-center gap-2">
+              <span class="flo-legend-dot legend-menstrual"></span> Menstruação
+            </span>
+            <span class="legend-item d-flex align-items-center gap-2">
+              <span class="flo-legend-dot legend-follicular"></span> Folicular
+            </span>
+            <span class="legend-item d-flex align-items-center gap-2">
+              <span class="flo-legend-dot legend-fertile"></span> Período Fértil
+            </span>
+            <span class="legend-item d-flex align-items-center gap-2">
+              <span class="flo-legend-dot legend-ovulation"></span> Dia da Ovulação
+            </span>
+            <span class="legend-item d-flex align-items-center gap-2">
+              <span class="flo-legend-dot legend-luteal"></span> Lútea
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Secção 1: Seleção de Músculo e Botões de Treino -->
+      <section class="col-12 col-md-6">
+        <div class="card shadow-sm border-0 p-4 h-100 select-section d-flex flex-column justify-content-between">
+          <div class="mb-3">
+            <label for="muscleSelect" class="form-label fw-semibold">Selecione o grupo muscular para o treino:</label>
+            <select id="muscleSelect" class="form-select">
+              <option value="pernas">Pernas e Glúteos (Inferiores)</option>
+              <option value="superiores">Peito, Costas e Braços (Superiores)</option>
+              <option value="core">Abdómen e Core</option>
+              <option value="fullbody">Corpo Inteiro (Full Body)</option>
+            </select>
+          </div>
+
+          <div class="button-group d-grid gap-2 mt-auto">
+            <button id="btnConsultar" type="button" class="btn fw-bold btn-training">Gerar Treino</button>
+            <button id="btnMudarPlanilha" type="button" class="btn button-new-training">Gerar nova ficha de treino</button>
+            <p class="sheet-tip text-muted small mt-2 mb-0 text-center">
+              💡 <em>Recomendação: mantenha a mesma ficha por <strong>2 a 3 meses</strong> para garantir a progressão de carga e a adaptação neuromuscular antes de gerar uma nova.</em>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Secção 2: Frase Motivacional -->
+      <section class="col-12 col-md-6">
+        <div id="quoteSection" class="card shadow-sm border-0 p-4 h-100 quote-card d-flex flex-column justify-content-center card-inspiration">
+          <h2 class="h4 mb-4 text-dark text-center mt-2">Inspiração do Dia</h2>
+          <blockquote id="quoteText" class="blockquote fs-5 text-italic text-dark mb-3 text-center">"Escolha um dia no calendário e gere o seu treino."</blockquote>
+          <figcaption class="blockquote-footer mt-auto mb-0 text-center">
+            <cite id="quoteAuthor" class="fw-semibold">CicloFit</cite>
+          </figcaption>
+        </div>
+      </section>
+
+      <!-- Secção do Treino Recomendado -->
+      <section class="col-12">
+        <div id="workoutSection" class="card shadow-sm border-0 p-4 workout-card">
+          <div class="workout-header d-flex align-items-center justify-content-between mb-3">
+            <h2 class="h4 mb-0">Treino Recomendado</h2>
+            <span id="sheetBadge" class="sheet-indicator badge bg-primary">Treino Dinâmico</span>
+          </div>
+          <p id="phaseDescription" class="badge bg-secondary fs-6 mb-3 p-2 text-wrap text-start lh-base">A aguardar seleção...</p>
+          <div id="exerciseList" class="exercise-grid row g-3"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="text-center mt-5 text-muted small">
+      <p>OAT 2 – Desenvolvimento de API’s | Diná Azevedo & Maria Fabiana Martins</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
